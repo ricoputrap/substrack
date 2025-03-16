@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Product Requirement Document (PRD) for Subscription Tracker
 
-## Getting Started
+## Project Overview
 
-First, run the development server:
+The **Subscription Tracker** aims to assist users in effectively tracking their various subscriptions. This tool is designed for individuals aged 20-40 who manage multiple subscriptions, such as streaming services, utilities, and rent. The application will provide a user-friendly interface to monitor subscription details, payment statuses, and insightful analytics.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Key Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. **User Authentication**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+   - **Sign Up / Login:** Secure user accounts with email/password or social media integration (Google preferred).
+   - **Profile Management:** Allows users to update personal information and preferences.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Subscription Tracking**
 
-## Learn More
+   - **Add Subscription:** Users can input subscription details, including:
+     - Name of the service
+     - Next due date
+     - Frequency (monthly, quarterly, annually)
+     - Price
+     - Payment status (paid, unpaid, upcoming)
+   - **Edit/Delete Subscription:** Users can modify or remove subscriptions as needed.
 
-To learn more about Next.js, take a look at the following resources:
+3. **Dashboard Overview**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   - **Subscription Summary:** A visual representation of total subscriptions, total monthly expenditure, and upcoming payments.
+   - **Payment Status Overview:** A pie chart or bar graph showing the percentage of paid vs. unpaid subscriptions.
+   - **Next Due Dates:** A calendar view highlighting upcoming payment dates for easy tracking.
+   - **Spending Insights:**
+     - Monthly spending trends (e.g., how much is spent on subscriptions each month).
+     - Comparison of spending across different categories (e.g., entertainment, utilities).
+   - **Savings Opportunities:** Suggestions for potential savings (e.g., canceling unused subscriptions).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. **Analytics and Insights**
 
-## Deploy on Vercel
+   - **Spending Trends:** Graphs showing spending patterns over time, helping users identify trends and adjust their budgets.
+   - **Category Breakdown:** Insights into how much is spent in different categories (e.g., entertainment, utilities, etc.).
+   - **Subscription Utilization:** Metrics on how often users utilize each subscription, helping them decide whether to keep or cancel services.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. **Export and Reporting**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   - **Export Data:** Users can export their subscription data to CSV or PDF for personal records or budgeting purposes.
+   - **Monthly Reports:** Automated monthly reports summarizing spending and recommendations.
+
+6. **Recurring Subscription Feature**
+
+   - **Recurring Subscription Setup:** Users can mark a subscription as recurring during the initial setup or through the subscription details page, specifying:
+     - Frequency (e.g., monthly, quarterly, annually)
+     - Start date
+     - End date (if applicable)
+   - **Automatic Creation of New Items:** The app will automatically generate new subscription entries based on the specified frequency, updating the next due date and maintaining the same price and status.
+   - **Management of Recurring Subscriptions:** Users can easily view, edit, or cancel recurring subscriptions from a dedicated section in the app.
+
+## Profile Management
+
+This section allows users to manage their profile information and preferences.
+
+- **User Account Details:**
+  - **Full Name:** The user's first and last name for identification.
+  - **Email Address:** Used for account verification and communication.
+- **Profile Picture:** Users can upload a profile picture.
+- **Preferences:**
+  - **Currency Preference:** Users can select their preferred currency for displaying subscription prices.
+  - **Language Preference:** Users can choose their preferred language for the app interface (English and Indonesian initially).
+  - **Theme Preferences:** Users can select a light or dark mode for the app interface.
+
+## Conclusion
+
+The **Subscription Tracker** will provide a comprehensive solution for users to effectively track their subscriptions. By focusing on user-friendly design and insightful analytics, the application will empower users to take control of their finances and make informed decisions about their subscriptions.
