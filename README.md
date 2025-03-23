@@ -67,3 +67,7 @@ This section allows users to manage their profile information and preferences.
 ## Conclusion
 
 The **Subscription Tracker** will provide a comprehensive solution for users to effectively track their subscriptions. By focusing on user-friendly design and insightful analytics, the application will empower users to take control of their finances and make informed decisions about their subscriptions.
+
+## References
+- [TrackMySubs.com](https://trackmysubs.com/)
+- 
