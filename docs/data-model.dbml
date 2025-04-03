@@ -1,0 +1,109 @@
+/**
+TODO:
+Add "is_email_verified" boolean column
+*/
+Table USER {
+  id integer [pk, increment]
+  email varchar(255) [unique, not null]
+  password_hash varchar(255)
+  full_name varchar(255) [not null]
+  display_name varchar(100)
+  language varchar(10) [default: 'en']
+  currency varchar(10) [default: 'USD']
+  birth_year integer
+  created_at integer [not null, default: `strftime('%s', 'now')`]
+  updated_at integer [not null, default: `strftime('%s', 'now')`]
+}
+
+/**
+Users have multiple ways for signing in to the system.
+Ex: Email Password, Google, Twitter, Github, etc.
+*/
+Table USER_AUTH_METHOD {
+  id integer [pk, increment]
+  user_id integer [not null]
+  auth_method enum [not null]
+  auth_identifier varchar(255) [unique, not null]
+  created_at integer [not null, default: `strftime('%s', 'now')`]
+  updated_at integer [not null, default: `strftime('%s', 'now')`]
+}
+
+/**
+Can't be modified.
+A nw record will be created everytime the user logins to the system.
+*/
+Table USER_LOGIN_HISTORY {
+  id integer [pk, increment]
+  user_id integer [not null]
+  login_time integer [not null]
+  ip_address varchar(45) [null]
+  device_info varchar(255) [null, note: "JSON"]
+  created_at integer [not null, default: `strftime('%s', 'now')`]
+}
+
+/**
+Read-heavy table
+Data can be cached
+Each user has their own categories
+*/
+Table SUBSCRIPTION_CATEGORY {
+  id integer [pk, increment]
+  user_id integer [not null]
+  name varchar(255) [not null]
+  created_at integer [not null, default: `strftime('%s', 'now')`]
+  updated_at integer [not null, default: `strftime('%s', 'now')`]
+}
+
+/**
+Stores the metadata of the subscription schedule.
+A CRON job will run everyday for creating a new `SUBSCRIPTION` record
+and updating the `next_due_date`.
+
+Events:
+1. A new record will be created when the user adds a new subscription.
+2. The `next_due_date` will be updated when `now()` > `next_due_date`.
+*/
+Table SUBSCRIPTION_SCHEDULE {
+  id integer [pk, increment]
+  billing_cycle enum [not null, note: "enums: monthly, yearly"]
+  start_date integer [not null, note: "unix timestamp"]
+  end_date integer [note: "unix timestamp", default: null]
+  next_due_date integer [note: "unix timestamp", default: null]
+  is_active boolean [default: true]
+  created_at integer [not null, default: `strftime('%s', 'now')`]
+  updated_at integer [not null, default: `strftime('%s', 'now')`]
+}
+
+/**
+Events:
+1. A new record will be created in these 2 situations:
+  a. When the user adds a new subscription.
+  b. When `now()` > `SUBSCRIPTION_SCHEDULE.next_due_date`
+     (will triggered by CRON).
+2. The `is_paid` will be updated when the user checks/unchecks
+   the subscription status.
+
+Things to consider:
+Add some derived attributes (`due_day_in_month`, `due_month_in_year`,
+and `due_year`) for easier data filtering in the dashboard later.
+*/
+Table SUBSCRIPTION {
+  id integer [pk, increment]
+  user_id integer [not null]
+  category_id integer [not null]
+  schedule_id integer [not null]
+  name varchar(255) [not null]
+  amount decimal [not null]
+  due_date integer [note: "unix timestamp"]
+  is_paid boolean [default: false]
+  created_at integer [not null, default: `strftime('%s', 'now')`]
+  updated_at integer [not null, default: `strftime('%s', 'now')`]
+}
+
+// many-to-one relations
+Ref: USER_AUTH_METHOD.user_id > USER.id
+Ref: USER_LOGIN_HISTORY.user_id > USER.id
+Ref: SUBSCRIPTION_CATEGORY.user_id > USER.id
+Ref: SUBSCRIPTION.user_id > USER.id
+Ref: SUBSCRIPTION.category_id > SUBSCRIPTION_CATEGORY.id
+Ref: SUBSCRIPTION.schedule_id > SUBSCRIPTION_SCHEDULE.id
