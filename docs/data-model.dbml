@@ -4,13 +4,14 @@ Add "is_email_verified" boolean column
 */
 Table USER {
   id integer [pk, increment]
-  email varchar(255) [unique, not null]
+  email varchar(255) [unique]
   password_hash varchar(255)
   full_name varchar(255) [not null]
   display_name varchar(100)
-  language varchar(10) [default: 'en']
-  currency varchar(10) [default: 'USD']
+  language enum [not null, default: 'en']
+  currency enum [not null, default: 'USD']
   birth_year integer
+  profile_picture text
   created_at integer [not null, default: `strftime('%s', 'now')`]
   updated_at integer [not null, default: `strftime('%s', 'now')`]
 }
@@ -20,31 +21,40 @@ Users have multiple ways for signing in to the system.
 Ex: Email Password, Google, Twitter, Github, etc.
 */
 Table USER_AUTH_METHOD {
-  id integer [pk, increment]
   user_id integer [not null]
   auth_method enum [not null]
-  auth_identifier varchar(255) [unique, not null]
+  auth_identifier varchar(255) [not null]
   created_at integer [not null, default: `strftime('%s', 'now')`]
   updated_at integer [not null, default: `strftime('%s', 'now')`]
+
+  indexes {
+    // composite primary key
+    // to make sure `auth_identifier` can be used for signing in
+    // using an `auth_method` only by a single user
+    (auth_method, auth_identifier)  [pk]
+  }
 }
 
 /**
-Can't be modified.
-A nw record will be created everytime the user logins to the system.
+A read-only data.
+A new record will be created everytime the user logins to the system.
 */
 Table USER_LOGIN_HISTORY {
-  id integer [pk, increment]
   user_id integer [not null]
   login_time integer [not null]
   ip_address varchar(45) [null]
   device_info varchar(255) [null, note: "JSON"]
   created_at integer [not null, default: `strftime('%s', 'now')`]
+
+  indexes {
+    (user_id, login_time) [pk] // composite primary key
+  }
 }
 
 /**
-Read-heavy table
-Data can be cached
-Each user has their own categories
+Read-heavy table.
+Data can be cached.
+Each user has their own categories.
 */
 Table SUBSCRIPTION_CATEGORY {
   id integer [pk, increment]
@@ -94,7 +104,7 @@ Table SUBSCRIPTION {
   schedule_id integer [not null]
   name varchar(255) [not null]
   amount decimal [not null]
-  due_date integer [note: "unix timestamp"]
+  due_date integer [not null, note: "unix timestamp"]
   is_paid boolean [default: false]
   created_at integer [not null, default: `strftime('%s', 'now')`]
   updated_at integer [not null, default: `strftime('%s', 'now')`]

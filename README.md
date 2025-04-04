@@ -70,4 +70,28 @@ The **Subscription Tracker** will provide a comprehensive solution for users to 
 
 ## References
 - [TrackMySubs.com](https://trackmysubs.com/)
-- 
+
+-------------------
+
+## Scripts
+
+### Applying changes to the DB
+This is a convenient method for quickly testing new schema designs or modifications in a local development environment, allowing for rapid iterations without the need to manage migration files:
+
+```bash
+npx drizzle-kit push
+```
+
+Read more about the push command in [documentation](https://orm.drizzle.team/docs/drizzle-kit-push).
+
+### Generate & Apply Migrations
+Alternatively, you can generate migrations using the drizzle-kit generate command and then apply them using the drizzle-kit migrate command:
+
+```bash
+npx drizzle-kit generate
+npx drizzle-kit migrate
+```
+
+Read more about migration process in [documentation](https://orm.drizzle.team/docs/kit-overview).
+
+### Seed and Query the database
