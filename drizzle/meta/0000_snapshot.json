@@ -1,11 +1,11 @@
 {
-  "id": "1a973998-c603-4254-a6ac-7e46d56aec7b",
+  "id": "6b8d3141-5632-44e9-b64e-aae1fb22f534",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.SUBSCRIPTION": {
-      "name": "SUBSCRIPTION",
+    "public.subscription": {
+      "name": "subscription",
       "schema": "",
       "columns": {
         "id": {
@@ -15,7 +15,7 @@
           "notNull": true,
           "identity": {
             "type": "always",
-            "name": "SUBSCRIPTION_id_seq",
+            "name": "subscription_id_seq",
             "schema": "public",
             "increment": "1",
             "startWith": "1",
@@ -70,23 +70,23 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "integer",
+          "type": "bigint",
           "primaryKey": false,
           "notNull": true
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "integer",
+          "type": "bigint",
           "primaryKey": false,
           "notNull": true
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "SUBSCRIPTION_user_id_USER_id_fk": {
-          "name": "SUBSCRIPTION_user_id_USER_id_fk",
-          "tableFrom": "SUBSCRIPTION",
-          "tableTo": "USER",
+        "subscription_user_id_user_id_fk": {
+          "name": "subscription_user_id_user_id_fk",
+          "tableFrom": "subscription",
+          "tableTo": "user",
           "columnsFrom": [
             "user_id"
           ],
@@ -96,10 +96,10 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "SUBSCRIPTION_category_id_SUBSCRIPTION_CATEGORY_id_fk": {
-          "name": "SUBSCRIPTION_category_id_SUBSCRIPTION_CATEGORY_id_fk",
-          "tableFrom": "SUBSCRIPTION",
-          "tableTo": "SUBSCRIPTION_CATEGORY",
+        "subscription_category_id_subscription_category_id_fk": {
+          "name": "subscription_category_id_subscription_category_id_fk",
+          "tableFrom": "subscription",
+          "tableTo": "subscription_category",
           "columnsFrom": [
             "category_id"
           ],
@@ -109,10 +109,10 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "SUBSCRIPTION_schedule_id_SUBSCRIPTION_SCHEDULE_id_fk": {
-          "name": "SUBSCRIPTION_schedule_id_SUBSCRIPTION_SCHEDULE_id_fk",
-          "tableFrom": "SUBSCRIPTION",
-          "tableTo": "SUBSCRIPTION_SCHEDULE",
+        "subscription_schedule_id_subscription_schedule_id_fk": {
+          "name": "subscription_schedule_id_subscription_schedule_id_fk",
+          "tableFrom": "subscription",
+          "tableTo": "subscription_schedule",
           "columnsFrom": [
             "schedule_id"
           ],
@@ -129,8 +129,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.SUBSCRIPTION_CATEGORY": {
-      "name": "SUBSCRIPTION_CATEGORY",
+    "public.subscription_category": {
+      "name": "subscription_category",
       "schema": "",
       "columns": {
         "id": {
@@ -140,7 +140,7 @@
           "notNull": true,
           "identity": {
             "type": "always",
-            "name": "SUBSCRIPTION_CATEGORY_id_seq",
+            "name": "subscription_category_id_seq",
             "schema": "public",
             "increment": "1",
             "startWith": "1",
@@ -164,23 +164,23 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "integer",
+          "type": "bigint",
           "primaryKey": false,
           "notNull": true
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "integer",
+          "type": "bigint",
           "primaryKey": false,
           "notNull": true
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "SUBSCRIPTION_CATEGORY_user_id_USER_id_fk": {
-          "name": "SUBSCRIPTION_CATEGORY_user_id_USER_id_fk",
-          "tableFrom": "SUBSCRIPTION_CATEGORY",
-          "tableTo": "USER",
+        "subscription_category_user_id_user_id_fk": {
+          "name": "subscription_category_user_id_user_id_fk",
+          "tableFrom": "subscription_category",
+          "tableTo": "user",
           "columnsFrom": [
             "user_id"
           ],
@@ -197,8 +197,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.SUBSCRIPTION_SCHEDULE": {
-      "name": "SUBSCRIPTION_SCHEDULE",
+    "public.subscription_schedule": {
+      "name": "subscription_schedule",
       "schema": "",
       "columns": {
         "id": {
@@ -208,7 +208,7 @@
           "notNull": true,
           "identity": {
             "type": "always",
-            "name": "SUBSCRIPTION_SCHEDULE_id_seq",
+            "name": "subscription_schedule_id_seq",
             "schema": "public",
             "increment": "1",
             "startWith": "1",
@@ -220,7 +220,7 @@
         },
         "billing_cycle": {
           "name": "billing_cycle",
-          "type": "billing_cycle",
+          "type": "enum_billing_cycle",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true
@@ -252,13 +252,13 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "integer",
+          "type": "bigint",
           "primaryKey": false,
           "notNull": true
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "integer",
+          "type": "bigint",
           "primaryKey": false,
           "notNull": true
         }
@@ -271,8 +271,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.USER": {
-      "name": "USER",
+    "public.user": {
+      "name": "user",
       "schema": "",
       "columns": {
         "id": {
@@ -282,7 +282,7 @@
           "notNull": true,
           "identity": {
             "type": "always",
-            "name": "USER_id_seq",
+            "name": "user_id_seq",
             "schema": "public",
             "increment": "1",
             "startWith": "1",
@@ -318,7 +318,7 @@
         },
         "language": {
           "name": "language",
-          "type": "language",
+          "type": "enum_language",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": false,
@@ -326,7 +326,7 @@
         },
         "currency": {
           "name": "currency",
-          "type": "currency",
+          "type": "enum_currency",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": false,
@@ -346,13 +346,13 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "integer",
+          "type": "bigint",
           "primaryKey": false,
           "notNull": true
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "integer",
+          "type": "bigint",
           "primaryKey": false,
           "notNull": true
         }
@@ -361,8 +361,8 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "USER_email_unique": {
-          "name": "USER_email_unique",
+        "user_email_unique": {
+          "name": "user_email_unique",
           "nullsNotDistinct": false,
           "columns": [
             "email"
@@ -373,8 +373,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.USER_AUTH_METHOD": {
-      "name": "USER_AUTH_METHOD",
+    "public.user_auth_method": {
+      "name": "user_auth_method",
       "schema": "",
       "columns": {
         "user_id": {
@@ -385,7 +385,7 @@
         },
         "auth_method": {
           "name": "auth_method",
-          "type": "auth_method",
+          "type": "enum_auth_method",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true
@@ -398,23 +398,23 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "integer",
+          "type": "bigint",
           "primaryKey": false,
           "notNull": true
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "integer",
+          "type": "bigint",
           "primaryKey": false,
           "notNull": true
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "USER_AUTH_METHOD_user_id_USER_id_fk": {
-          "name": "USER_AUTH_METHOD_user_id_USER_id_fk",
-          "tableFrom": "USER_AUTH_METHOD",
-          "tableTo": "USER",
+        "user_auth_method_user_id_user_id_fk": {
+          "name": "user_auth_method_user_id_user_id_fk",
+          "tableFrom": "user_auth_method",
+          "tableTo": "user",
           "columnsFrom": [
             "user_id"
           ],
@@ -426,8 +426,8 @@
         }
       },
       "compositePrimaryKeys": {
-        "USER_AUTH_METHOD_auth_method_auth_identifier_pk": {
-          "name": "USER_AUTH_METHOD_auth_method_auth_identifier_pk",
+        "user_auth_method_auth_method_auth_identifier_pk": {
+          "name": "user_auth_method_auth_method_auth_identifier_pk",
           "columns": [
             "auth_method",
             "auth_identifier"
@@ -439,8 +439,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.USER_LOGIN_HISTORY": {
-      "name": "USER_LOGIN_HISTORY",
+    "public.user_login_history": {
+      "name": "user_login_history",
       "schema": "",
       "columns": {
         "user_id": {
@@ -469,17 +469,17 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "integer",
+          "type": "bigint",
           "primaryKey": false,
           "notNull": true
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "USER_LOGIN_HISTORY_user_id_USER_id_fk": {
-          "name": "USER_LOGIN_HISTORY_user_id_USER_id_fk",
-          "tableFrom": "USER_LOGIN_HISTORY",
-          "tableTo": "USER",
+        "user_login_history_user_id_user_id_fk": {
+          "name": "user_login_history_user_id_user_id_fk",
+          "tableFrom": "user_login_history",
+          "tableTo": "user",
           "columnsFrom": [
             "user_id"
           ],
@@ -491,8 +491,8 @@
         }
       },
       "compositePrimaryKeys": {
-        "USER_LOGIN_HISTORY_user_id_login_time_pk": {
-          "name": "USER_LOGIN_HISTORY_user_id_login_time_pk",
+        "user_login_history_user_id_login_time_pk": {
+          "name": "user_login_history_user_id_login_time_pk",
           "columns": [
             "user_id",
             "login_time"
@@ -506,32 +506,32 @@
     }
   },
   "enums": {
-    "public.auth_method": {
-      "name": "auth_method",
+    "public.enum_auth_method": {
+      "name": "enum_auth_method",
       "schema": "public",
       "values": [
         "credentials",
         "google"
       ]
     },
-    "public.billing_cycle": {
-      "name": "billing_cycle",
+    "public.enum_billing_cycle": {
+      "name": "enum_billing_cycle",
       "schema": "public",
       "values": [
         "monthly",
         "yearly"
       ]
     },
-    "public.currency": {
-      "name": "currency",
+    "public.enum_currency": {
+      "name": "enum_currency",
       "schema": "public",
       "values": [
         "USD",
         "IDR"
       ]
     },
-    "public.language": {
-      "name": "language",
+    "public.enum_language": {
+      "name": "enum_language",
       "schema": "public",
       "values": [
         "en",
