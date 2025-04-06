@@ -32,3 +32,8 @@ All user's subscription items, including the paid ones, shouldn't be lost as the
 
 5. **Read-heavy**
 The primary goal of the subscription tracker app is to help users track, monitor, and evaluate their subscriptions. This inherently makes the app read-heavy, as users will **frequently access their subscription data to review their spending and insights**.
+
+## C. API Definitions
+1. Sign up with Credentials (`POST "/v1/api/signup"`)
+2. Login with Credentials (server action)
+3. Login & sign up with Google
