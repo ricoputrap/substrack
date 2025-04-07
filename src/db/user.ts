@@ -7,8 +7,7 @@ export interface INewUser {
   full_name: string
 }
 
-export async function createUser(data: INewUser) {
+export async function createUser(data: INewUser): Promise<number> {
   const res = await db.insert(USER).values([data]).returning({ id: USER.id })
-
-  return res;
+  return res[0].id;
 }

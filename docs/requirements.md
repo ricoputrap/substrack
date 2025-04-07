@@ -5,8 +5,10 @@ Substrack is a web application that allows users to **track their subscriptions*
 The application should provide the following features:
 
 ## Epic 1: User Authentication
-1. As a user, I want to **sign up** for an account using my **Google** account so that I can access the Subscription Tracker seamlessly.
-2. As a user, I want to **log in** to my account securely using my **Google** credentials so that I can manage my subscriptions without hassle.
+-  [ ] 1. As a user, I want to **sign up** for an account using my **email & password** so that I can access the Subscription Tracker seamlessly.
+-  [ ] 2. As a user, I want to **log in** to my account securely using my **email & password** so that I can manage my subscriptions without hassle.
+-  [ ] 3. As a user, I want to **sign up** for an account using my **Google** account so that I can access the Subscription Tracker seamlessly.
+-  [ ] 4. As a user, I want to **log in** to my account securely using my **Google** account so that I can manage my subscriptions without hassle.
 
 ## Epic 2: Subscription Tracking
 1. As a user, I want to **add a subscription** to my account so that I can track my spending on various subscriptions.
