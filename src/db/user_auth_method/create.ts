@@ -10,6 +10,6 @@ import db from "@/clients/db";
  * 
  * @throws Error - If there is an error during the insertion process.
  */
-export async function createNew(data: INewUserAuthMethod) {
+export async function create(data: INewUserAuthMethod) {
   await db.insert(USER_AUTH_METHOD).values([data]);
 }

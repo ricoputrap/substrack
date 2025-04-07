@@ -1,10 +1,10 @@
-import { createNew } from "./createNew";
-import { getByIdentifier } from "./getByIdentifier";
+import { create } from "./create";
 import { IUserAuthMethodDB } from "./types";
+import { getByIdentifier } from "./getByIdentifier";
 
 const UserAuthMethodDB: IUserAuthMethodDB = {
   getByIdentifier,
-  createNew
+  create
 }
 
 export default UserAuthMethodDB;

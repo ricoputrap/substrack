@@ -9,5 +9,5 @@ export interface INewUserAuthMethod {
 
 export interface IUserAuthMethodDB {
   getByIdentifier: (auth_identifier: string) => Promise<TUserAuthMethodSelect[]>;
-  createNew: (data: INewUserAuthMethod) => Promise<void>;
+  create: (data: INewUserAuthMethod) => Promise<void>;
 }
