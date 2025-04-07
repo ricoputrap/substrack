@@ -1,12 +1,12 @@
-import { EnumAuthMethod, EnumHttpStatus } from '@/constants';
-import { TUserAuthMethodSelect } from '@/db/schema';
-import { createUser } from '@/db/user';
-import { createUserAuthMethod, getUserAuthMethods } from '@/db/user_auth_method';
-import { createErrorResponse, createResponse } from '@/lib/utils/api';
-import { saltAndHashPassword } from '@/lib/utils/auth';
 import { NeonDbError } from '@neondatabase/serverless';
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
+import { EnumAuthMethod, EnumHttpStatus } from '@/constants';
+import { TUserAuthMethodSelect } from '@/db/schema';
+import UserAuthMethodDB from '@/db/user_auth_method';
+import { createErrorResponse, createResponse } from '@/lib/utils/api';
+import { saltAndHashPassword } from '@/lib/utils/auth';
+import UserDB from '@/db/user';
 
 const signUpSchema = z.object({
   email: z.string({ required_error: "Email is required" })
@@ -42,7 +42,9 @@ export async function POST(req: Request) {
     }
 
     // find all `USER_AUTH_METHOD` by the email
-    const userAuthMethods: TUserAuthMethodSelect[] = await getUserAuthMethods(validatedFields.data.email);
+    const userAuthMethods: TUserAuthMethodSelect[] = await UserAuthMethodDB.getByIdentifier(
+      validatedFields.data.email
+    );
 
     // email has been registered
     if (userAuthMethods.length > 0) {
@@ -70,14 +72,14 @@ export async function POST(req: Request) {
     const password_hash = await saltAndHashPassword(validatedFields.data.password);
 
     // create a new user
-    const newUserID = await createUser({
+    const newUserID = await UserDB.create({
       email: validatedFields.data.email,
       password_hash: password_hash,
       full_name: validatedFields.data.full_name
     })
 
     // create a new USER_AUTH_METHOD record
-    await createUserAuthMethod({
+    await UserAuthMethodDB.create({
       user_id: newUserID,
       auth_method: EnumAuthMethod.CREDENTIALS,
       auth_identifier: validatedFields.data.email
